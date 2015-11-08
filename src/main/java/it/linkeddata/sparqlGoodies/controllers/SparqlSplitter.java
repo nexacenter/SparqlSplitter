@@ -1,6 +1,7 @@
 package it.linkeddata.sparqlGoodies.controllers;
 
 import it.linkeddata.sparqlGoodies.splitter.ConfigurationBean;
+import it.linkeddata.sparqlGoodies.splitter.Query;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Locale;
@@ -73,11 +74,11 @@ public class SparqlSplitter {
 
 			/* query result */
 
-			return query(conf, model, req, res, locale, query, output);
+			return query(request, conf, model, req, res, locale, query, output);
 		}
 	}
 
-	public Object query(ConfigurationBean conf, ModelMap model, HttpServletRequest req, HttpServletResponse res, Locale locale, String query, String output) throws UnsupportedEncodingException {
+	public Object query(String confUser, ConfigurationBean conf, ModelMap model, HttpServletRequest req, HttpServletResponse res, Locale locale, String query, String output) throws UnsupportedEncodingException {
 
 		/* guessing the content Lang */
 
@@ -97,14 +98,20 @@ public class SparqlSplitter {
 			}
 		}
 
+		String sparqlUrl = conf.getSingleConfValueForSubject(confUser, "sparqlURL", null);
+		String namedGraph = conf.getSingleConfValueForSubject(confUser, "graph", null);
+
 		try {
+			Query q = new Query(sparqlUrl, namedGraph);
+			Object result = q.doQuery(query);
+			q.done();
 			if (lang == null) {
 				matchItem = AcceptList.match(offeringResources, a);
 				if (matchItem != null) {
 
 					/* return HTML content */
-
-					return null;
+					//  ResultSetFormatter.outputAsCSV((ResultSet) result)
+					return result;
 				} else {
 					return new ErrorController().error406(res, model);
 				}
@@ -114,6 +121,7 @@ public class SparqlSplitter {
 
 				return null;
 			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			if (e.getMessage() != null && e.getMessage().startsWith("404")) {
@@ -122,7 +130,6 @@ public class SparqlSplitter {
 				return new ErrorController().error500(res, model, e.getMessage());
 			}
 		}
-
 	}
 
 }

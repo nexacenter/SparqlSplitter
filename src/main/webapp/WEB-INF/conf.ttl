@@ -16,8 +16,6 @@
  
 
 
-
-
 	########################################################################################
 	########################      configuring a single user		########################
 	########################################################################################
@@ -25,7 +23,10 @@
 
 <http://localhost:8080/example>		a				conf:Configuration;
 									conf:user		"user1";
+									conf:graph		<http://example.com/prova>;
+									conf:sparqlURL	"C:/siti/_workspace-sts/SparqlSplitter/testTDB";	
+													### http://example.com/sparql
+													###	file:///example/jenaTdbDB
+													###	virtuoso://username:password@example:1111/
 					
-	
-
 	conf:last	"."	.

@@ -59,7 +59,6 @@ public class ConfigurationBean implements ServletContextAware {
 
 	public String getSingleConfValueForSubject(String subject, String prop, String defaultValue) {
 		NodeIterator iter = confModel.listObjectsOfProperty(confModel.createResource(subject), genProp(prop));
-		confModel.write(System.out);
 		while (iter.hasNext()) {
 			RDFNode node = iter.next();
 			System.out.println(node);

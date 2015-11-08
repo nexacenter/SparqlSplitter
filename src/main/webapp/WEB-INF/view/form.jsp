@@ -14,8 +14,9 @@
 <title>Welcome</title>
 </head>
 <body>
-	<form method="post">
-		<textarea name="query" style="width: 100%; height: 50%"></textarea>
+	<form method="get">
+		<textarea name="query" style="width: 100%; height: 400px">select * {?s ?D ?f}</textarea>
+		<input type="submit">
 	</form>
 </body>
 </html>
