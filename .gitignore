@@ -57,3 +57,11 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+# Eclipse Project Files
+
+.classpath
+.project
+.settings/
+target/
+.springBeans

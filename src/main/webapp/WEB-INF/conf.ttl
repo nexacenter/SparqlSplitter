@@ -1,0 +1,31 @@
+@prefix conf: <http://linkeddata.it/sparql-splitter#> .
+
+
+	########################################################################################
+	########################	configuring the webapp		########################
+	########################################################################################
+
+
+
+<http://linkeddata.it/sparql-splitter#conf> a conf:Configuration;
+
+	conf:staticResourcePrefixURL "";    	## or "/yourSstaticPath", if you change this you 
+					    					## have to use a web server to serve static contents
+
+	conf:last	"."	.
+ 
+
+
+
+
+	########################################################################################
+	########################      configuring a single user		########################
+	########################################################################################
+
+
+<http://localhost:8080/example>		a				conf:Configuration;
+									conf:user		"user1";
+					
+	
+
+	conf:last	"."	.
